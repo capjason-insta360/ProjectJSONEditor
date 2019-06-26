@@ -1,0 +1,700 @@
+/**
+////////////////////////////////////////////////////////////////////////////////
+//	
+//	Copyright 2014 Ardisia Labs LLC. All Rights Reserved.
+//
+//	This file is licensed under the Ardisia Component Library License. 
+//
+//	Only license holders are entitled to use this file subject to the  
+//	conditions of the license. All other uses are expressly forbidden. Visit 
+//	http://www.ardisialabs.com to view and purchase a license.
+//
+//	Apache Flex's source code notices are reproduced below.
+//
+// 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+//
+//  Licensed to the Apache Software Foundation (ASF) under one or more
+//  contributor license agreements.  See the NOTICE file distributed with
+//  this work for additional information regarding copyright ownership.
+//  The ASF licenses this file to You under the Apache License, Version 2.0
+//  (the "License"); you may not use this file except in compliance with
+//  the License.  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+////////////////////////////////////////////////////////////////////////////////
+*/
+
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@namespace accordion "ardisia.components.accordion.*";
+@namespace autoComplete "ardisia.components.autoComplete.*";
+@namespace buttonBar "ardisia.components.buttonBar.*";
+@namespace calculator "ardisia.components.calculator.*";
+@namespace colorPicker "ardisia.components.colorPicker.*";
+@namespace compassContainer "ardisia.components.compassContainer.*";
+@namespace dataTip "ardisia.components.dataTip.*";
+@namespace datePicker "ardisia.scheduling.datePicker.*";
+@namespace dockingCompassContainer "ardisia.components.dockingCompassContainer.*";
+@namespace expandingContainer "ardisia.components.expandingContainer.*";
+@namespace heatmap "ardisia.charts.heatmap.*";
+@namespace fieldSet "ardisia.components.fieldSet.*";
+@namespace floatPaneControlBar "ardisia.components.floatPaneControlBar.*";
+@namespace menuBar "ardisia.components.menuBar.*";
+@namespace pane "ardisia.components.pane.*";
+@namespace popUpButton "ardisia.components.popUpButton.*";
+@namespace progressDisplay "ardisia.components.progressDisplay.*";
+@namespace richTextEditor "ardisia.components.richTextEditor.*";
+@namespace rotaryField "ardisia.components.rotaryField.*";
+@namespace separators "ardisia.components.separators.*";
+@namespace sliderField "ardisia.components.sliderField.*";
+@namespace tabPaneNavigator "ardisia.components.paneNavigators.tabPaneNavigator.*";
+@namespace timebarContainer "ardisia.components.timebarContainer.*";
+@namespace timePicker "ardisia.components.timePicker.*";
+@namespace toolbar "ardisia.components.toolbar.*";
+@namespace wheelList "ardisia.components.wheelList.*";
+@namespace gauges "ardisia.components.gauges.*";
+@namespace iconButton "ardisia.components.iconButton.*";
+@namespace scroller "ardisia.components.scroller.*";
+@namespace arashiComponents "com.insta360.pro.view.components.*";
+
+/**
+* 	London Theme
+*
+*	Hue: black; Saturation: 0; Luminosity: varied
+*
+* 	Background Dark						: L:140, Hex: #9A9A9A;
+* 	Background Light					: L:180, Hex: #BFBFBF;
+* 	Content Background					: L: 213, Hex: #E2E2E2;
+* 	Border Dark: 						: L 90, Hex: #5F5F5F;
+* 	Border Light						: L: 115, Hex: #7A7A7A;
+* 	Dark Gradient						: L: 223, Hex: #EDEDED | L: 192, Hex: #CDCDCD;
+* 	Control Border						: #7A7A7A (border light) alpha 0.85;
+* 	Very Light 							: L: 234, Hue: #F9F9F9
+*	Drop Shadow							: blurX/Y 20" alpha 0.35 distance 7
+*/
+
+global
+{
+	alternating-row-colors: #FFFFFF, #F7F7F7;
+	border-color: #7A7A7A;
+	border-alpha: 0.85;
+	caret-color: #3399FF;
+	color: #CCCCCC;
+	content-background-color: #E2E2E2;
+	content-background-alpha: 1;
+	corner-radius: 0;
+	focus-color: #4CB4FF;
+	focused-text-selection-color: #BBD3FD;
+	font-family: "Microsoft Yahei",Arial, Tahoma, "_sans";
+	font-size: 12;
+	focus-thickness: 1;
+	header-colors: #FFFFFF, #DBDBDB;
+	modal-transparency-duration: 100;
+	modal-transparency-blur: 3.0;
+	modal-transparency: 0.5;
+	modal-transparency-color: #000000;
+	roll-over-color: #DEDEDE;
+	selection-color: #3399FF;
+	selection-duration: 0;
+	text-selected-color: #FFFFFF;
+}
+
+/**
+* Ardisia Components
+**/
+
+accordion|Accordion
+{
+	background-color: #E2E2E2;
+	border-alpha: 0.85;
+}
+
+accordion|AccordionContainer
+{
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.accordion.AccordionContainerSkin");
+}
+
+autoComplete|AutoComplete
+{
+	skin-class: ClassReference("ardisia.components.autoComplete.themes.london.skins.AutoCompleteSkin");
+}
+
+calculator|CalculatorGridEditor #popupButton
+{
+	skin-class: ClassReference("ardisia.components.calculator.themes.london.skins.CalculatorGridEditorButtonSkin");
+}
+
+colorPicker|ColorPicker
+{
+	skin-class: ClassReference("ardisia.components.colorPicker.themes.london.skins.ColorPickerSkin");
+}
+
+compassContainer|CompassContainerBase
+{
+	gap: 0;
+	gap-color: #C6C6C6;
+	gap-alpha: 0;
+	resize-region-width: 6;
+	resize-region-height: 6;
+	center-border-visible: true;
+	center-border-color: #7A7A7A;
+	north-border-color: #7A7A7A;
+	north-background-color: #F9F9F9;
+	east-border-color: #7A7A7A;
+	east-background-color: #F9F9F9;
+	south-background-color: #F9F9F9;
+	south-border-color: #7A7A7A;
+	west-background-color: #F9F9F9;
+	west-border-color: #7A7A7A;
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.compassContainer.CompassContainerSkin");
+}
+
+dataTip|DataTip
+{
+	background-color: #FFFFB3;
+	border-color: #FFFFB3;
+	corner-radius: 4;
+}
+
+datePicker|DatePicker
+{
+	border-color: #7A7A7A;
+	border-alpha: 0.85;
+	border-visible: true;
+	skin-class: ClassReference("ardisia.scheduling.datePicker.themes.london.skins.DatePickerSkin");
+}
+
+dockingCompassContainer|DockingCompassContainer
+{
+	skin-class: ClassReference("ardisia.components.dockingCompassContainer.themes.london.skins.DockingCompassContainerSkin");
+}
+
+expandingContainer|ExpandingContainer
+{
+	color:#D6D6D6;
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.pro.ExpandingContainerSkin");
+}
+
+fieldSet|FieldSet
+{
+	border-color: #1A1A1A;
+	background-color: #FFFFFF;
+	skin-class: ClassReference("ardisia.components.fieldSet.themes.london.skins.FieldSetSkin");
+}
+
+floatPaneControlBar|FloatPaneControlBar
+{
+	skin-class: ClassReference("ardisia.components.floatPaneControlBar.themes.london.skins.FloatPaneControlBarSkin");
+}
+
+heatmap|Heatmap
+{
+	skin-class: ClassReference("ardisia.charts.heatmap.themes.london.skins.HeatmapSkin");
+}
+
+gauges|GaugeBase
+{
+	tick-offset: 5;
+	label-offset: 5;
+	major-tick-color: #454545;
+	minor-tick-color: #BCBCBC;
+}
+
+gauges|HLinearGauge
+{
+	skin-class: ClassReference("ardisia.components.gauges.themes.london.skins.HLinearGaugeSkin");
+}
+
+gauges|VLinearGauge
+{
+	skin-class: ClassReference("ardisia.components.gauges.themes.london.skins.VLinearGaugeSkin");
+}
+
+menuBar|MenuBar
+{
+	menu-vertical-offset: 0;
+	item-skin: ClassReference("ardisia.components.menuBar.themes.london.skins.MenuBarItemSkin");
+}
+
+pane|Pane
+{
+	pane-chrome: #E5E5E5;
+	background-color: #E5E5E5;
+	skinClass: ClassReference("ardisia.components.pane.themes.london.skins.PaneSkin");
+}
+
+popUpButton|PopUpButton
+{
+	skin-class: ClassReference("ardisia.components.popUpButton.themes.london.skins.PopUpButtonSkin");
+}
+
+progressDisplay|ProgressDisplayDeterminate
+{
+	skin-class: ClassReference("ardisia.components.progressDisplay.themes.london.skins.ProgressDisplayDeterminateSkin");
+}
+
+rotaryField|RotaryField
+{		
+	/* padding makes caret look better */
+	padding-top: 2;
+	padding-right: 0;
+	padding-bottom: 2;
+	padding-left: 0;
+	skin-class: ClassReference("ardisia.components.rotaryField.themes.london.skins.RotaryFieldSkin");
+}
+
+separators|SeparatorBase
+{
+	primary-stroke-color: #000000;
+	primary-stroke-alpha: 0.15;
+	primary-stroke-thickness: 1;
+	secondary-stroke-color: #FFFFFF;
+	secondary-stroke-alpha: 1;
+	secondary-stroke-thickness: 1;
+}
+
+sliderField|SliderField
+{
+	padding-top: 2;
+	padding-right: 0;
+	padding-bottom: 2;
+	padding-left: 0;
+	skin-class: ClassReference("ardisia.components.sliderField.themes.london.skins.SliderFieldSkin");
+} 
+
+buttonBar|ButtonBarBase.firstButtonBar
+{
+/*	buttonStyleName: "firstButtonBarBtn";*/
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.buttonBar.firstButtonBar.FirstButtonBarSkin");
+}
+
+buttonBar|ButtonBarBase.lastButtonBar 
+{
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.buttonBar.lastButtonBar.LastButtonBarSkin");
+}
+
+buttonBar|TabBar
+{
+	skin-class: ClassReference("ardisia.components.buttonBar.themes.london.skins.TabBarSkin");
+}
+
+richTextEditor|RichTextEditor
+{
+	background-color: #E2E2E2;
+}
+
+tabPaneNavigator|TabPaneNavigator
+{
+	skin-class: ClassReference("ardisia.components.paneNavigators.tabPaneNavigator.themes.london.skins.TabPaneNavigatorSkin");
+}
+
+timebarContainer|TimebarContainerHScrollBar
+{
+	skin-class: ClassReference("ardisia.components.timebarContainer.themes.london.skins.TimebarContainerHScrollBarSkin");
+}
+
+timePicker|TimePicker
+{
+	skin-class: ClassReference("ardisia.components.timePicker.themes.london.skins.TimePickerSkin");
+}
+
+toolbar|Toolbar
+{
+	skin-class: ClassReference("ardisia.components.toolbar.themes.london.skins.ToolbarSkin");
+}
+
+toolbar|ToolbarButton
+{
+	skin-class: ClassReference("ardisia.components.toolbar.themes.london.skins.ToolbarButtonSkin");
+}
+
+toolbar|ToolbarColorTransformButton
+{
+	skin-class: ClassReference("ardisia.components.toolbar.themes.london.skins.ToolbarColorTransformButtonSkin");
+}
+
+toolbar|ToolbarColorTransformIconToggleButton
+{
+	skin-class: ClassReference("ardisia.components.toolbar.themes.london.skins.ToolbarColorTransformIconToggleButtonSkin");
+}
+
+toolbar|ToolbarTabBar
+{
+	skin-class: ClassReference("ardisia.components.toolbar.themes.london.skins.ToolbarTabBarSkin");
+}
+
+wheelList|WheelList
+{
+	skin-class: ClassReference("ardisia.components.wheelList.themes.london.skins.WheelListSkin");
+}
+
+/**
+* Halo controls
+*
+* Many mx controls do not support FTE by default. However, many support 
+* UIFTETextField and MXFTETextInput.
+**/
+
+mx|AdvancedDataGrid
+{
+	font-size: 11;
+	use-roll-over: false;
+}
+
+mx|AdvancedDataGridHeaderRenderer, mx|AdvancedDataGridSortItemRenderer, 
+mx|AdvancedDataGridItemRenderer, mx|AdvancedDataGridGroupItemRenderer
+{
+	color: #333333;
+	font-size: 12;
+}
+
+mx|DateField
+{
+	disabledSkin: ClassReference(null);
+	downSkin: ClassReference(null);
+	upSkin: ClassReference(null);
+	overSkin: ClassReference(null);
+	skin: Embed("ardisia/themes/london/assets/icons/calendar.png");
+}
+
+mx|TextInput
+{
+	background-color: #FFFFFF;
+	content-background-color: #FFFFFF;
+}
+
+/*mx|Menu*/
+/*{*/
+	/*border-skin: ClassReference("ardisia.themes.london.skins.halo.MenuBorderSkin");*/
+	/*border-visible: false;*/
+	/*branch-disabled-icon: ClassReference("ardisia.themes.london.skins.halo.MenuBranchDisabledIconHaloSkin");*/
+	/*branch-icon: ClassReference("ardisia.themes.london.skins.halo.MenuBranchIconHaloSkin");*/
+	/*check-disabled-icon: ClassReference("ardisia.themes.london.skins.halo.MenuCheckDisabledHaloSkin");*/
+	/*check-icon: ClassReference("ardisia.themes.london.skins.halo.MenuCheckHaloSkin");*/
+	/*content-background-color: #FFFFFF;*/
+	/*left-icon-gap: 20;*/
+	/*padding-bottom: 2;*/
+	/*padding-left: 5;*/
+	/*padding-right: 5;*/
+	/*padding-top: 2;*/
+	/*radio-disabled-icon: ClassReference("ardisia.themes.london.skins.halo.MenuRadioDisabledIconHaloSkin");*/
+	/*radio-icon: ClassReference("ardisia.themes.london.skins.halo.MenuRadioIconHaloSkin");*/
+	/*separator-skin: ClassReference("ardisia.themes.london.skins.halo.MenuSeperatorHaloSkin");*/
+/*}*/
+
+mx|ScrollBar
+{
+	down-arrow-disabled-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/down-arrow-disabled-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	down-arrow-up-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/down-arrow-up-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	down-arrow-over-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/down-arrow-over-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	down-arrow-down-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/down-arrow-down-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	down-arrow-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/down-arrow-up-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	thumb-up-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/thumb-up-skin.png', scaleGridLeft="2", scaleGridTop="1", scaleGridRight="16", scaleGridBottom="17");
+	thumb-over-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/thumb-over-skin.png', scaleGridLeft="2", scaleGridTop="1", scaleGridRight="16", scaleGridBottom="17");
+	thumb-down-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/thumb-down-skin.png', scaleGridLeft="2", scaleGridTop="1", scaleGridRight="16", scaleGridBottom="17");
+	thumb-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/thumb-up-skin.png', scaleGridLeft="2", scaleGridTop="1", scaleGridRight="16", scaleGridBottom="17");
+	track-disabled-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/track-disabled-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="2");
+	track-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/track-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="2");
+	up-arrow-disabled-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/up-arrow-disabled-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	up-arrow-up-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/up-arrow-up-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	up-arrow-over-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/up-arrow-over-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	up-arrow-down-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/up-arrow-down-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	up-arrow-skin: Embed(source='ardisia/themes/london/assets/halo/scrollBar/up-arrow-up-skin.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="17", scaleGridBottom="17");
+	thumb-icon: Embed(source='ardisia/themes/london/assets/halo/scrollBar/thumb-icon.png', scaleGridLeft="1", scaleGridTop="1", scaleGridRight="6", scaleGridBottom="7");	
+}
+
+mx|ToolTip
+{
+	border-skin: ClassReference("mx.skins.halo.ToolTipBorder");
+	color: #000000;
+	border-color: #7A7A7A;
+	background-color: #FFFFB3;
+	font-size: 11;
+}
+
+mx|Tree
+{
+	/* itemRenderer factory must be applied inline */
+	border-color: #7A7A7A;
+	border-alpha: 0.85;
+	content-background-color: #FFFFFF;
+	default-leaf-icon: ClassReference(null);
+	disclosure-open-icon: ClassReference("ardisia.themes.london.skins.halo.TreeArrowDownHaloSkin"); 
+	disclosure-closed-icon: ClassReference("ardisia.themes.london.skins.halo.TreeArrowRightHaloSkin"); 
+	folder-open-icon: Embed(source="ardisia/themes/assets/icons/folder-open.png");
+	folder-closed-icon: Embed(source="ardisia/themes/assets/icons/folder-open.png");
+	open-duration: 100; /* do not set to 0, can cause selection issues */
+	text-selected-color: #FFFFFF;
+	use-roll-over: false;
+}
+
+
+mx|Menu {
+	contentBackgroundColor: #2D2D2D;
+	rollOverColor: #48494a;
+	color: #eeeeee;
+	paddingLeft: 10;
+	paddingRight: 10;
+	paddingTop: 5;
+	paddingBottom: 5;
+	borderVisible: false;
+	textRollOverColor: #ffffff;
+}
+
+/**
+* Spark components
+**/
+
+s|Application
+{
+	background-color: #878988;
+	background-alpha: 1;
+}
+
+s|BorderContainer
+{
+	border-color: #7A7A7A;
+	border-alpha: 0.85;
+}
+
+s|Button
+{
+	cornerRadius:2;
+	color:#3B3B3B;
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.button.FirstButtonSkin");
+}
+
+s|Button.weakenButton
+{
+	color:#ffffff;
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.button.WeakenButtonSkin");
+}
+
+s|Button.emphasized
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.ButtonEmphasizedSkin");
+}
+
+s|ButtonBar
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.ButtonBarSkin");
+}
+
+s|CheckBox
+{
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.CheckBoxSkin");
+}
+
+s|ComboBox
+{
+	/* padding makes caret look better */
+	padding-top: 2;
+	padding-right: 0;
+	padding-bottom: 2;
+	padding-left: 0;
+	skin-class: ClassReference("ardisia.themes.london.skins.ComboBoxSkin");
+}
+
+s|ComboBox #popUp 
+{
+	font-size: 11;
+}
+
+s|DataGrid #grid
+{
+	font-size: 11;
+}
+
+s|DropDownList
+{
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.dropDownList.DropDownListSkin");
+}
+
+s|DropDownList #popUp 
+{
+	font-size: 11;
+}
+
+s|Form
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.FormSkin");
+}
+
+s|FormItem
+{
+	/* background support dropped */
+	font-weight: normal;
+	skin-class: ClassReference("ardisia.themes.london.skins.FormItemSkin");
+}
+
+s|FormHeading
+{
+	/* background support dropped */
+	font-weight: bold;
+	skin-class: ClassReference("ardisia.themes.london.skins.FormHeadingSkin");
+}
+
+s|HScrollBar
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.HScrollBarSkin");
+}
+
+s|HSlider
+{
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.hSlider.thinHSlider.HSliderSkin");
+}
+
+
+s|MXFTETextInput
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.TextInputSkin");
+}
+
+s|List
+{
+	content-background-color: #FFFFFF;
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.ListSkin");
+}
+
+s|NumericStepper
+{
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.numericStepper.NumericStepperSkin");
+}
+
+s|Panel
+{
+	background-alpha: 1;
+	background-color: #FFFFFF;
+	drop-shadow-visible: false;
+	skin-class: ClassReference("ardisia.themes.london.skins.PanelSkin");
+}
+
+s|RadioButton
+{
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.radioButton.FirstRadionButtonSkin");
+}
+
+s|Spinner
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.SpinnerSkin");
+}
+
+s|SkinnablePopUpContainer
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.SkinnablePopUpContainerSkin");
+}
+
+s|VScrollBar
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.VScrollBarSkin");
+}
+
+s|TabBar
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.TabBarSkin");
+}
+
+s|TextArea
+{
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.textarea.TextAreaSkin");
+}
+
+s|TextInput
+{
+	/* padding makes caret look better */
+	padding-top: 2;
+	padding-right: 0;
+	padding-bottom: 2;
+	padding-left: 0;
+	focusedTextSelectionColor:#7A7A7A;
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.textInput.TextInputSkin");
+}
+
+s|TextInput.emphasized
+{
+	/* padding makes caret look better */
+	padding-top: 6;
+	padding-right: 0;
+	padding-bottom: 6;
+	padding-left: 12;
+	focusAlpha:0;
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.textInput.EmphasizedTextInputSkin");
+}
+
+s|TitleWindow
+{
+	background-color: #F9F9F9;
+	border-alpha: 1; /* doesn't inherit for unknown reason */
+	border-color: #A4A4A4; /* doesn't inherit for unknown reason */
+	drop-shadow-visible: true;
+	skin-class: ClassReference("ardisia.themes.london.skins.TitleWindowSkin");
+}
+
+s|ToggleButton
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.ToggleButtonSkin");
+}
+
+s|VSlider
+{
+	skin-class: ClassReference("ardisia.themes.london.skins.VSliderSkin");
+}
+
+s|Scroller {
+	skin-class: ClassReference("com.insta360.themes.arashi.skins.components.scroller.ScrollerSkin");
+}
+
+s|SkinnableContainer.arashiSkinnableContainer {
+	backgroundColor:#2D2D2D;
+}
+
+s|SkinnableContainer.popupBubbleContainer {
+	backgroundColor:#2D2D2D;
+	backgroundAlpha:0.5;
+	skin-class:ClassReference("com.insta360.themes.arashi.skins.components.skinnableContainer.PopupBubbleContainer");
+}
+
+separators|HSeparator {
+	padding-top:0;
+	padding-bottom:0;
+	secondaryStrokeColor: #000000;
+	secondaryStrokeAlpha: 0.1;
+}
+
+separators|VSeparator {
+	padding-left:0;
+	padding-right:0;
+}
+
+iconButton|IconButton {
+	skin-class:ClassReference("com.insta360.themes.arashi.skins.components.iconButton.IconButtonSkin");
+}
+
+mx|ToolTip {
+	fontSize:12;
+}
+
+mx|Alert {
+	buttonStyleName:"alertButton";
+	messageStyleName:"alertMessage";
+	titleStyleName:"alertTitle";
+	backgroundColor:#676768;
+	color:#CCCCCC;
+	titleBackgroundSkin:ClassReference("com.insta360.themes.arashi.skins.mx.alert.AVTitleBackground");
+}
+
+
+.alertButton {
+	/*emphasizedSkin:ClassReference("com.insta360.ui.skins.spark.Button.AVButton");*/
+	skin:ClassReference("com.insta360.themes.arashi.skins.components.button.FirstButtonSkin");
+	color:#292929;
+	rollOverColor:#CCCCCC;
+}

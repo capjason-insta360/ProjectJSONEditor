@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        alpha.disabled="0.5">
+
+    <!-- host component -->
+    <fx:Metadata>
+		<![CDATA[ [HostComponent("ardisia.components.expandingContainer.ExpandingContainer")] ]]>
+	</fx:Metadata>
+
+    <!-- declarations -->
+    <fx:Declarations>
+
+        <!-- ExpandingContainerHeaderButtonSkin -->
+        <fx:Component className="ExpandingContainerHeaderButtonSkin">
+            <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+                    xmlns:s="library://ns.adobe.com/flex/spark"
+                    xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+                    minWidth="21" minHeight="27" height="32"
+                    alpha.disabled="0.5">
+
+                <!-- host component -->
+                <fx:Metadata>
+					<![CDATA[ [HostComponent("spark.components.supportClasses.ToggleButtonBase")] ]]>
+				</fx:Metadata>
+
+                <!-- scripts -->
+                <fx:Script>
+					<![CDATA[
+
+                    //----------------------------------
+                    //  methods
+                    //----------------------------------
+
+                    override protected function updateDisplayList(unscaledWidth:Number,
+                                                                  unscaledHeight:Number):void
+                    {
+                        super.updateDisplayList(unscaledWidth, unscaledHeight);
+
+                        // adjust the placement of the label if the icon is set
+//                        if (iconDisplay.source && labelDisplay)
+//                        {
+//                            var labelRight:Number = labelDisplay.x + labelDisplay.getLayoutBoundsWidth();
+//                            labelDisplay.x = iconDisplay.x + iconDisplay.getLayoutBoundsWidth() + 4;
+//
+//                            // keep right point locked to text will truncate if overflows
+//                            labelDisplay.setLayoutBoundsSize(labelRight - labelDisplay.x, labelDisplay.getLayoutBoundsHeight());
+//                        }
+                    }
+
+                    ]]>
+				</fx:Script>
+
+                <!-- states -->
+                <s:states>
+                    <s:State name="up" />
+                    <s:State name="over" stateGroups="overStates"/>
+                    <s:State name="down" stateGroups="downStates"/>
+                    <s:State name="disabled" stateGroups="disabledStates" />
+                    <s:State name="upAndSelected" stateGroups="selectedStates, selectedUpStates" />
+                    <s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+                    <s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+                    <s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
+                </s:states>
+
+
+                <s:Rect left="0" right="0" top="0" bottom="0">
+                    <s:fill>
+                        <s:SolidColor color="#333333" color.overStates="#444444" color.downStates="#222222" />
+                    </s:fill>
+                </s:Rect>
+
+                <!--&lt;!&ndash;- bottom border &ndash;&gt;-->
+                <!--<s:Line right="0" top="0" left="0">-->
+                    <!--<s:stroke>-->
+                        <!--<s:SolidColorStroke weight="1"-->
+                                            <!--joints="miter"-->
+                                            <!--caps="square"-->
+                                            <!--color="#222222"-->
+                                            <!--alpha="0.75"-->
+                                            <!--alpha.downStates="0.75"/>-->
+                    <!--</s:stroke>-->
+                <!--</s:Line>-->
+
+                <!--- bottom border -->
+                <s:Line right="0" bottom="0" left="0">
+                    <s:stroke>
+                        <s:SolidColorStroke weight="1"
+                                            joints="miter"
+                                            caps="square"
+                                            color="#222222"
+                                            alpha="0.75" alpha.downStates="0.75"/>
+                    </s:stroke>
+                </s:Line>
+
+                <!--&lt;!&ndash;- arrow &ndash;&gt;-->
+                <!--<s:Path id="arrow"-->
+                        <!--right="6"-->
+                        <!--verticalCenter="0"-->
+                        <!--transformX="-1" transformY="2"-->
+                        <!--rotation="-90" rotation.selectedStates="0"-->
+                        <!--data="M 3.5 4.0 L 0 0 L 7 0 L 3.5 4.0">-->
+                    <!--<s:fill>-->
+                        <!--<s:SolidColor color="#CCCCCC"/>-->
+                    <!--</s:fill>-->
+                <!--</s:Path>-->
+
+                <!-- skin part -->
+                <!--- @optional -->
+                <s:Label id="labelDisplay"
+                         verticalCenter="1"
+                         left="16"
+                         maxDisplayedLines="1"
+                         fontWeight="normal"
+                         paddingTop="8" paddingBottom="8"/>
+
+                <!-- skin part -->
+                <!--- @optional -->
+                <s:BitmapImage id="iconDisplay"
+                               fillMode="clip"
+                               verticalCenter="0"
+                               rotation="90"
+                               rotation.selectedStates="-90"
+                               right="8"/>
+
+            </s:Skin>
+        </fx:Component>
+
+    </fx:Declarations>
+
+    <!-- states -->
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="open" />
+        <s:State name="disabled" />
+    </s:states>
+
+    <!-- layout -->
+    <s:layout>
+        <s:VerticalLayout gap="0"
+                          horizontalAlign="justify"/>
+    </s:layout>
+
+    <!-- skin part -->
+    <!--- @optional -->
+    <s:ToggleButton id="headerBtnPart"
+                    top="0" right="0" left="0"
+                    skinClass="{Class(ExpandingContainerHeaderButtonSkin)}"/>
+
+    <!-- skin part -->
+    <!--- @required -->
+    <s:Group id="contentGroup"
+             minWidth="0" minHeight="0"
+             top="0" right="0" bottom="0" left="0"/>
+
+</s:Skin>

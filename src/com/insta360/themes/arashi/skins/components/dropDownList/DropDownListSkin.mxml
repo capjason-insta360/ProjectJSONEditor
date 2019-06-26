@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+////////////////////////////////////////////////////////////////////////////////
+//	
+//	Copyright 2014 Ardisia Labs LLC. All Rights Reserved.
+//
+//	This file is licensed under the Ardisia Component Library License. 
+//
+//	Only license holders are entitled to use this file subject to the  
+//	conditions of the license. All other uses are expressly forbidden. Visit 
+//	http://www.ardisialabs.com to view and purchase a license.
+//
+//	Apache Flex's source code notices are reproduced below.
+//
+// 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+//
+//  Licensed to the Apache Software Foundation (ASF) under one or more
+//  contributor license agreements.  See the NOTICE file distributed with
+//  this work for additional information regarding copyright ownership.
+//  The ASF licenses this file to You under the Apache License, Version 2.0
+//  (the "License"); you may not use this file except in compliance with
+//  the License.  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	    xmlns:s="library://ns.adobe.com/flex/spark"
+	    xmlns:mx="library://ns.adobe.com/flex/mx"
+	    xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+		xmlns:scroller="ardisia.components.scroller.*"
+	    minWidth="21" minHeight="23" 
+	    alpha.disabled="0.5"> 
+
+    <!-- host component -->
+    <fx:Metadata>
+    	<![CDATA[ [HostComponent("spark.components.DropDownList")]]]>
+    </fx:Metadata> 
+    
+    <!-- states -->
+	<s:states>
+        <s:State name="normal" />
+        <s:State name="open" />
+        <s:State name="disabled" />
+    </s:states>
+    
+	<s:PopUpAnchor id="popUp"  
+				   includeIn="open"
+				   displayPopUp.normal="false" displayPopUp.open="true" 
+				   top="0" right="0" bottom="0" left="0" 
+				   itemDestructionPolicy="auto"
+				   popUpPosition="below" 
+				   itemCreationPolicy="immediate"
+				   popUpWidthMatchesAnchorWidth="true">
+		
+		<s:Group id="dropDown">
+			
+			<!--- drop shadow -->
+			<s:RectangularDropShadow id="dropShadow" 
+									 top="0" right="0" bottom="0" left="0" 
+									 blurX="20" blurY="20" 
+									 alpha="0.45" 
+									 distance="7" 
+									 angle="90" 
+									 color="#000000"/>
+			
+			
+			
+			<!--- fill -->
+			<s:Rect id="background" 
+					top="0" right="0" bottom="0" left="0">
+				<s:stroke>
+					<s:SolidColorStroke color="#1A1A1A" weight="2" />
+				</s:stroke>
+				<s:fill>
+					<s:SolidColor id="bgFill" 
+								   color="#1F1F1F" />
+				</s:fill>
+			</s:Rect>
+			
+			<scroller:Scroller id="scroller" 
+							   top="0" right="0" bottom="0" left="0"
+							   hasFocusableChildren="false" 
+							   minViewportInset="0">
+				<s:DataGroup id="dataGroup" 
+							 left="5">
+					<s:layout>
+						<s:VerticalLayout gap="0" 
+										  horizontalAlign="contentJustify" 
+										  requestedMinRowCount="1" requestedMaxRowCount="10"/>
+					</s:layout>
+					
+					<!--- inline renderer -->
+					<s:itemRenderer>
+						<fx:Component>
+							<s:ItemRenderer>
+								<s:states>
+									<s:State name="normal" />
+									<s:State name="hovered" stateGroups="hoveredGroup"/>
+									<s:State name="selectedAndHovered" stateGroups="selectedGroup, hoveredGroup"/>
+									<s:State name="selected" stateGroups="selectedGroup"/>
+								</s:states>
+								
+								<s:Rect left="0" right="0" top="0" bottom="0">
+									<s:fill>
+										<s:SolidColor color="#3D3D3D" color.hovered="#282828"/>
+									</s:fill>
+								</s:Rect>
+								
+								<s:Label id="labelDisplay"
+										 verticalCenter="1"
+										 color.selectedGroup="#FFD200"
+										 top="5" left="5" right="5" bottom="5"
+										 maxDisplayedLines="1"/>
+								
+							</s:ItemRenderer>
+						</fx:Component>
+					</s:itemRenderer>
+					
+				</s:DataGroup> 
+			</scroller:Scroller>
+		</s:Group>
+	</s:PopUpAnchor>
+    
+	<!-- skin part -->
+	<!--- @optional -->
+	<s:Button id="openButton" 
+			  right="0" top="0" bottom="0" left="0" 
+			  focusEnabled="false" tabEnabled="false"
+			  skinClass="com.insta360.themes.arashi.skins.components.dropDownList.DropDownListButtonSkin" />  
+        
+	<!-- skin part -->
+	<!--- @optional -->
+	<s:Label id="labelDisplay" 
+			 width="75" 
+			 verticalCenter="0"
+			 right="30" left="10"
+			 color="#CCCCCC"
+			 color.open="#4D4D4D"
+			 verticalAlign="middle" maxDisplayedLines="1" 
+			 mouseEnabled="false" mouseChildren="false" /> 
+
+</s:Skin>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		minHeight="23" minWidth="60"
+		alpha.disabled="0.5">
+
+	<!-- host component -->
+    <fx:Metadata>
+    	<![CDATA[ [HostComponent("spark.components.NumericStepper")] ]]>
+    </fx:Metadata> 
+	
+	<!-- states -->
+	<s:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+    </s:states>
+
+	<!-- skin part -->
+	<!--- @required -->
+	<s:TextInput id="textDisplay" 
+				 minHeight="0"
+				 borderColor="#1A1A1A"
+				 left="14" right="14" height="100%"
+				 focusRect="false"
+                 contentBackgroundColor="#282828"
+				 skinClass="com.insta360.themes.arashi.skins.pro.TextInputSkin"
+				 />
+
+	<!-- skin part -->
+	<!--- @optional -->
+    <s:Button id="incrementButton" 
+			  width="14" height="100%"
+			  top="0" right="0"
+			  tabEnabled="false" 
+              skinClass="com.insta360.themes.arashi.skins.pro.numericStepper.NumericStepperIncrementButtonSkin" />
+              
+	<!-- skin part -->
+	<!--- @optional -->
+	<s:Button id="decrementButton" 
+			  width="14" height="100%"
+			  left="0" bottom="0"
+			  tabEnabled="false" 
+              skinClass="com.insta360.themes.arashi.skins.pro.numericStepper.NumericStepperDecrementButtonSkin" />
+        
+</s:Skin>

@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+                       xmlns:s="library://ns.adobe.com/flex/spark"
+                       showStatusBar="false"
+                       backgroundColor="0x2D2D2D"
+                       backgroundAlpha="0"
+                       height="450"
+                       width="800"
+                       creationComplete="creationCompleteHandler(event)"
+>
+    <fx:Style source="defaults.css" />
+    <fx:Script><![CDATA[
+        import com.insta360.jsoneditor.model.ClipInfo;
+
+        import mx.collections.ArrayCollection;
+        import mx.events.DragEvent;
+        import mx.events.FlexEvent;
+
+        [Bindable]
+        public var clips:ArrayCollection = new ArrayCollection();
+
+        [Bindable]
+        public var result:String;
+
+        private function creationCompleteHandler(event:FlexEvent):void {
+            clips.addItem(new ClipInfo(0.25, 133));
+        }
+
+        private function button1_clickHandler(event:MouseEvent):void {
+            clips.addItem(new ClipInfo(1, 0));
+        }
+
+        private function skinnableContainer1_dragDropHandler(event:DragEvent):void {
+            trace("drop");
+        }
+
+        private function button2_clickHandler(event:MouseEvent):void {
+            var duration:Number = 0;
+            var out:Array = [];
+            for(var i:int = 0;i < clips.length; ++i) {
+                var clip:ClipInfo = clips.getItemAt(i) as ClipInfo;
+                var mediaDuration:int = int(clip.duration / clip.factor);
+                out.push({
+                    startTimeInMS: duration,
+                    endTimeInMS: duration + mediaDuration,
+                    factor:clip.factor
+                });
+                duration += mediaDuration;
+            }
+            result = JSON.stringify(out,null,2);
+            trace(JSON.stringify(out));
+        }
+        ]]></fx:Script>
+
+    <s:layout>
+        <s:VerticalLayout />
+    </s:layout>
+    <s:Scroller width="100%" >
+        <s:HGroup height="100%" padding="24">
+            <s:List
+                    height="100%"
+                    contentBackgroundAlpha="0"
+                    borderVisible="false"
+                    id="clipList"
+                    dataProvider="{clips}"
+                    itemRenderer="com.insta360.view.itemRenderer.ClipInfoItemRenderer"
+            >
+                <s:layout>
+                    <s:HorizontalLayout verticalAlign="middle" />
+                </s:layout>
+            </s:List>
+            <s:Button height="100%" label="+" fontWeight="bold" fontSize="28"
+                      click="button1_clickHandler(event)"
+            />
+        </s:HGroup>
+    </s:Scroller>
+
+    <s:TextArea width="100%" height="200"
+                contentBackgroundAlpha="0"
+                borderColor="0x1A1A1A"
+                text="{result}" paddingLeft="24" paddingRight="24">
+
+    </s:TextArea>
+
+    <s:HGroup width="100%" horizontalAlign="right" padding="24" height="120" verticalAlign="middle">
+        <!--<s:SkinnableContainer-->
+                <!--styleName="arashiSkinnableContainer"-->
+                <!--width="120" height="100%"-->
+                <!--dragDrop="skinnableContainer1_dragDropHandler(event)" >-->
+            <!--<s:Rect left="0" right="0" top="0" bottom="0" width="1">-->
+                <!--<s:stroke>-->
+                    <!--<s:SolidColorStroke color="0x1A1A1A" />-->
+                <!--</s:stroke>-->
+            <!--</s:Rect>-->
+        <!--</s:SkinnableContainer>-->
+        <s:HGroup height="36" >
+            <s:Button label="export" click="button2_clickHandler(event)" />
+        </s:HGroup>
+    </s:HGroup>
+</s:WindowedApplication>

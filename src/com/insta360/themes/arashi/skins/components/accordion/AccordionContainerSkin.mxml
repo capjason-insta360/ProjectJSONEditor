@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	Copyright 2014 Ardisia Labs LLC. All Rights Reserved.
+//
+//	This file is licensed under the Ardisia Component Library License.
+//
+//	Only license holders are entitled to use this file subject to the
+//	conditions of the license. All other uses are expressly forbidden. Visit
+//	http://www.ardisialabs.com to view and purchase a license.
+//
+//	Apache Flex's source code notices are reproduced below.
+//
+// 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+//  Licensed to the Apache Software Foundation (ASF) under one or more
+//  contributor license agreements.  See the NOTICE file distributed with
+//  this work for additional information regarding copyright ownership.
+//  The ASF licenses this file to You under the Apache License, Version 2.0
+//  (the "License"); you may not use this file except in compliance with
+//  the License.  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+        alpha.disabled="0.5">
+
+    <!-- host component -->
+    <fx:Metadata>
+		<![CDATA[ [HostComponent("ardisia.components.accordion.AccordionContainer")] ]]>
+	</fx:Metadata>
+
+    <!-- declarations -->
+    <fx:Declarations>
+
+        <!-- AccordionContainerHeaderButtonSkin -->
+        <fx:Component className="AccordionContainerHeaderButtonSkin">
+            <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+                    xmlns:s="library://ns.adobe.com/flex/spark"
+                    xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+                    minWidth="21" minHeight="27"
+                    alpha.disabled="1">
+
+                <!-- host component -->
+                <fx:Metadata>
+					<![CDATA[ [HostComponent("spark.components.supportClasses.ToggleButtonBase")] ]]>
+				</fx:Metadata>
+
+                <!-- scripts -->
+                <fx:Script>
+					<![CDATA[
+
+                    //----------------------------------
+                    //  methods
+                    //----------------------------------
+
+                    override protected function updateDisplayList(unscaledWidth:Number,
+                                                                  unscaledHeight:Number):void
+                    {
+                        super.updateDisplayList(unscaledWidth, unscaledHeight);
+
+                        // adjust the placement of the label if the icon is set
+                        if (iconDisplay.source && labelDisplay)
+                        {
+                            var labelRight:Number = labelDisplay.x + labelDisplay.getLayoutBoundsWidth();
+                            labelDisplay.x = iconDisplay.x + iconDisplay.getLayoutBoundsWidth() + 4;
+
+                            // keep right point locked to text will truncate if overflows
+                            labelDisplay.setLayoutBoundsSize(labelRight - labelDisplay.x, labelDisplay.getLayoutBoundsHeight());
+                        }
+                    }
+
+                    ]]>
+				</fx:Script>
+
+                <!-- states -->
+                <s:states>
+                    <s:State name="up" />
+                    <s:State name="over" stateGroups="overStates"/>
+                    <s:State name="down" stateGroups="downStates"/>
+                    <s:State name="disabled" stateGroups="disabledStates" />
+                    <s:State name="upAndSelected" stateGroups="selectedStates, selectedUpStates" />
+                    <s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+                    <s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+                    <s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
+                </s:states>
+
+                <!-- background -->
+                <s:Rect left="0" right="0" top="0" bottom="0">
+                    <s:fill>
+                        <s:SolidColor color="#333333" color.overStates="#444444" color.downStates="#222222" />
+                    </s:fill>
+                </s:Rect>
+
+                <!--- bottom border -->
+                <s:Line right="0" bottom="0" left="0">
+                    <s:stroke>
+                        <s:SolidColorStroke weight="1"
+                                            joints="miter"
+                                            caps="square"
+                                            color="#222222"
+                                            alpha="0.75" alpha.downStates="0.75"/>
+                    </s:stroke>
+                </s:Line>
+
+                <!--- arrow -->
+                <s:Path id="arrow"
+                        x="10"
+                        verticalCenter="0"
+                        transformX="-1" transformY="2"
+                        rotation="0" rotation.selectedStates="90"
+                        data="M 0 -2.5 L 2.5 0 L 0 2.5">
+                    <s:stroke>
+                        <s:SolidColorStroke weight="2"
+                                            color="#CCCCCC"
+                                            pixelHinting="false"
+                                            caps="square"
+                                            joints="round"/>
+                    </s:stroke>
+                </s:Path>
+
+                <!-- skin part -->
+                <!--- @optional -->
+                <s:Label id="labelDisplay"
+                         verticalCenter="1"
+                         right="2" left="23"
+                         maxDisplayedLines="1"
+                         fontWeight="bold"
+                         paddingTop="2" paddingBottom="2"/>
+
+                <!-- skin part -->
+                <!--- @optional -->
+                <s:BitmapImage id="iconDisplay"
+                               fillMode="clip"
+                               verticalCenter="0"
+                               left="21"/>
+
+            </s:Skin>
+        </fx:Component>
+
+    </fx:Declarations>
+
+    <!-- states -->
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="open" />
+        <s:State name="disabled" />
+    </s:states>
+
+    <!-- layout -->
+    <s:layout>
+        <s:VerticalLayout gap="0"
+                          horizontalAlign="justify"/>
+    </s:layout>
+
+    <!-- skin part -->
+    <!--- @optional -->
+    <s:ToggleButton id="headerBtnPart"
+                    top="0" left="0" right="0"
+                    skinClass="{Class(AccordionContainerHeaderButtonSkin)}"/>
+
+
+    <!-- skin part -->
+    <!--- @required -->
+    <s:Group id="contentGroup"
+             minWidth="0" minHeight="0"
+             height="100%" width="100%"/>
+
+</s:Skin>

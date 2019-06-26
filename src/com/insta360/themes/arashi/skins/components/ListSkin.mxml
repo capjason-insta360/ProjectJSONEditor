@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	Copyright 2014 Ardisia Labs LLC. All Rights Reserved.
+//
+//	This file is licensed under the Ardisia Component Library License.
+//
+//	Only license holders are entitled to use this file subject to the
+//	conditions of the license. All other uses are expressly forbidden. Visit
+//	http://www.ardisialabs.com to view and purchase a license.
+//
+//	Apache Flex's source code notices are reproduced below.
+//
+// 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+//  Licensed to the Apache Software Foundation (ASF) under one or more
+//  contributor license agreements.  See the NOTICE file distributed with
+//  this work for additional information regarding copyright ownership.
+//  The ASF licenses this file to You under the Apache License, Version 2.0
+//  (the "License"); you may not use this file except in compliance with
+//  the License.  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        xmlns:scroller="ardisia.components.scroller.*"
+        alpha.disabled="0.5"
+        minWidth="112"
+        blendMode="normal">
+
+    <!-- host component -->
+    <fx:Metadata>
+    	<![CDATA[ [HostComponent("spark.components.List")] ]]>
+    </fx:Metadata>
+
+    <!-- script -->
+    <fx:Script>
+		<![CDATA[
+
+        //----------------------------------
+        //  variables
+        //----------------------------------
+
+        protected var stylesChanged:Boolean;
+
+        protected var _borderVisible:Boolean;
+
+        protected var _borderAlpha:Number;
+
+        protected var _borderColor:uint;
+
+        protected var _contentBackgroundColor:uint;
+
+        protected var _contentBackgroundAlpha:uint;
+
+        //----------------------------------
+        //  methods
+        //----------------------------------
+
+        override protected function updateDisplayList(w:Number,
+                                                      h:Number):void
+        {
+            if (border && _borderVisible)
+            {
+                border.visible = true;
+                stroke.color = _borderColor;
+                stroke.alpha = _borderAlpha;
+                scroller.top = scroller.right = scroller.bottom = scroller.left = 1;
+            }
+            else
+            {
+                border.visible = false;
+                scroller.top = scroller.right = scroller.bottom = scroller.left = 0;
+            }
+
+            if (bgFill)
+            {
+                bgFill.color = _contentBackgroundColor;
+                bgFill.alpha = _contentBackgroundAlpha;
+            }
+
+            super.updateDisplayList(w, h);
+
+        }
+
+        override protected function commitProperties():void
+        {
+            super.commitProperties();
+
+            if (stylesChanged)
+            {
+                stylesChanged = false;
+
+                _borderVisible = getStyle("borderVisible");
+                _borderAlpha = getStyle("borderAlpha");
+                _borderColor = getStyle("borderColor");
+                _contentBackgroundColor = getStyle("contentBackgroundColor");
+                _contentBackgroundAlpha = getStyle("contentBackgroundAlpha");
+
+                invalidateDisplayList();
+            }
+        }
+
+        override public function styleChanged(styleProp:String):void
+        {
+            super.styleChanged(styleProp);
+
+            stylesChanged = true;
+            invalidateProperties();
+        }
+
+        ]]>
+	</fx:Script>
+
+    <!-- states -->
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+    </s:states>
+
+    <!--- fill -->
+    <s:Rect id="fill"
+            top="0" right="0" bottom="0" left="0">
+        <s:fill>
+            <s:SolidColor id="bgFill"
+                          color="#FFFFFF" />
+        </s:fill>
+    </s:Rect>
+
+    <!--- border -->
+    <s:Rect id="border"
+            top="0" right="0" bottom="0" left="0">
+        <s:stroke>
+            <s:SolidColorStroke id="stroke"
+                                color="#7A7A7A"
+                                alpha="0.85"
+                                weight="1"
+                                caps="square"
+                                joints="miter"
+                                pixelHinting="true"/>
+        </s:stroke>
+    </s:Rect>
+
+    <scroller:Scroller id="scroller"
+                       top="0" right="0" bottom="0" left="0"
+                       hasFocusableChildren="false"
+                       minViewportInset="0">
+
+        <!-- skin part -->
+        <!--- @optional -->
+        <s:DataGroup id="dataGroup">
+            <s:layout>
+                <s:VerticalLayout gap="0"
+                                  horizontalAlign="contentJustify"
+                                  requestedMinRowCount="5" />
+            </s:layout>
+            <s:itemRenderer>
+
+                <fx:Component>
+                    <s:ItemRenderer>
+
+                        <s:states>
+                            <s:State name="normal" />
+                            <s:State name="hovered" stateGroups="hoveredGroup"/>
+                            <s:State name="selectedAndHovered" stateGroups="selectedGroup, hoveredGroup"/>
+                            <s:State name="selected" stateGroups="selectedGroup"/>
+                        </s:states>
+
+                        <s:Label id="labelDisplay"
+                                 verticalCenter="1"
+                                 color="#454545" color.selectedGroup="#FFFFFF"
+                                 top="5" left="5" right="5" bottom="5"
+                                 maxDisplayedLines="1"/>
+
+                    </s:ItemRenderer>
+                </fx:Component>
+
+            </s:itemRenderer>
+        </s:DataGroup>
+    </scroller:Scroller>
+
+</s:Skin>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	Copyright 2014 Ardisia Labs LLC. All Rights Reserved.
+//
+//	This file is licensed under the Ardisia Component Library License.
+//
+//	Only license holders are entitled to use this file subject to the
+//	conditions of the license. All other uses are expressly forbidden. Visit
+//	http://www.ardisialabs.com to view and purchase a license.
+//
+//	Apache Flex's source code notices are reproduced below.
+//
+// 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+//  Licensed to the Apache Software Foundation (ASF) under one or more
+//  contributor license agreements.  See the NOTICE file distributed with
+//  this work for additional information regarding copyright ownership.
+//  The ASF licenses this file to You under the Apache License, Version 2.0
+//  (the "License"); you may not use this file except in compliance with
+//  the License.  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        alpha.disabledStates="0.5"
+        minHeight="23">
+
+    <!-- host component -->
+    <fx:Metadata>
+   	 	<![CDATA[ [HostComponent("spark.components.RadioButton")]]]>
+    </fx:Metadata>
+
+    <!-- states -->
+    <s:states>
+        <s:State name="up" />
+        <s:State name="over" stateGroups="overStates" />
+        <s:State name="down" stateGroups="downStates" />
+        <s:State name="disabled" stateGroups="disabledStates" />
+        <s:State name="upAndSelected" stateGroups="selectedStates" />
+        <s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+        <s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+        <s:State name="disabledAndSelected" stateGroups="disabledStates, selectedStates" />
+    </s:states>
+
+    <s:Group width="14" height="14"
+             verticalCenter="0"
+             layoutDirection="ltr">
+
+        <!--- border and fill -->
+        <s:Ellipse top="0" right="0" bottom="0" left="0">
+            <s:fill>
+                <s:SolidColor color="0x191919" alpha="1" alpha.overStates="0.6" />
+            </s:fill>
+        </s:Ellipse>
+
+        <!--- ellipse -->
+        <s:Ellipse horizontalCenter="0" verticalCenter="0"
+                   width="6" height="6"
+                   alpha="0" alpha.selectedStates="1">
+            <s:fill>
+                <s:SolidColor color="0xffd200" />
+            </s:fill>
+        </s:Ellipse>
+
+    </s:Group>
+
+    <!-- skin part -->
+    <!--- @optional -->
+    <s:Label id="labelDisplay"
+             right="5" left="21"
+             maxDisplayedLines="1"
+             verticalCenter="1" />
+</s:Skin>

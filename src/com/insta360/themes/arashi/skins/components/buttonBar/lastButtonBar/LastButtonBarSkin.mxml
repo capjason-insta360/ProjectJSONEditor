@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+////////////////////////////////////////////////////////////////////////////////
+//	
+//	Copyright 2014 Ardisia Labs LLC. All Rights Reserved.
+//
+//	This file is licensed under the Ardisia Component Library License. 
+//
+//	Only license holders are entitled to use this file subject to the  
+//	conditions of the license. All other uses are expressly forbidden. Visit 
+//	http://www.ardisialabs.com to view and purchase a license.
+//
+//	Apache Flex's source code notices are reproduced below.
+//
+// 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+//
+//  Licensed to the Apache Software Foundation (ASF) under one or more
+//  contributor license agreements.  See the NOTICE file distributed with
+//  this work for additional information regarding copyright ownership.
+//  The ASF licenses this file to You under the Apache License, Version 2.0
+//  (the "License"); you may not use this file except in compliance with
+//  the License.  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	    xmlns:s="library://ns.adobe.com/flex/spark"
+	    xmlns:fb="http://ns.adobe.com/flashbuilder/2009"     
+	    xmlns:layouts="ardisia.components.buttonBar.layouts.*"
+		xmlns:buttonBar="ardisia.components.buttonBar.*" 
+		alpha.disabled="0.5">
+    
+	<!-- host component -->
+    <fx:Metadata>
+        <![CDATA[ [HostComponent("ardisia.components.buttonBar.ButtonBarBase")] ]]>
+    </fx:Metadata>
+	
+	<!-- declarations -->
+	<fx:Declarations>
+		
+		<!-- ButtonBarCloseButtonSkin -->
+		<fx:Component className="ButtonBarCloseButtonSkin">
+			<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					alpha.disabled="0.5">
+				
+				<!-- host component -->
+				<fx:Metadata>
+					<![CDATA[ [HostComponent("spark.components.Button")] ]]>
+				</fx:Metadata>
+				
+				<!-- states -->
+				<s:states>
+					<s:State name="up" />
+					<s:State name="over" />
+					<s:State name="down" />
+					<s:State name="disabled" />
+				</s:states>
+				
+				<s:Rect top="0" right="0" bottom="0" left="0"
+						alpha="0" alpha.over="1" alpha.down="1">
+					<s:fill>
+						<s:SolidColor id="ellipseFill" 
+									  color="#007FBF" color.down="#800000" />
+					</s:fill>
+				</s:Rect>
+				
+				<s:Path verticalCenter="0" horizontalCenter="0" 
+						width="5" height="5"
+						data="M 0 -5 L 5 5 M 0 5 L 5 -5">        
+					<s:stroke>
+						<s:SolidColorStroke id="strokeFill" 
+											weight="2" 
+											pixelHinting="false"
+											caps="square"
+											color="#343434" color.over="#FFFFFF" color.down="#FFFFFF"/>
+					</s:stroke>
+				</s:Path>
+				
+			</s:Skin>
+		</fx:Component>
+		
+		<!-- ButtonBarButtonSkin -->
+		<!--- do not use SparkButtonSkin, layout handled in the skin -->
+		<fx:Component className="ButtonBarButtonSkin">
+			<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					minWidth="21" minHeight="25"
+					alpha.disabledStates="0.5"
+					depth.selectedStates="2" depth.over="1" depth.down="1">
+				
+				<!-- host component -->
+				<fx:Metadata>
+					<![CDATA[ [HostComponent("ardisia.components.buttonBar.ButtonBarButton")] ]]>
+				</fx:Metadata>
+				
+				<!-- scripts -->
+				<fx:Script>
+					<![CDATA[
+						import ardisia.components.buttonBar.ButtonBarButton;
+						
+						override protected function updateDisplayList(unscaledWidth:Number, 
+																	  unscaledHeight:Number):void
+						{
+							var label:Label = labelDisplay as Label;
+							
+							// set the left for the label
+							if (label && iconDisplay)
+							{
+								label.left = iconDisplay.left;
+								var iconWidth:Number = iconDisplay.getPreferredBoundsWidth();
+								var iconGap:Number = 5;
+								if (iconWidth > 0)
+									label.left += iconWidth + iconGap;
+							}
+							
+							super.updateDisplayList(unscaledWidth, unscaledHeight);
+							
+							// hide the label/icon if it overflows; prevent the label from hiding its truncation ellipsis because
+							// measurement never recovers
+							if (label)
+							{
+								// the closeButtonPart may be cached, check if on the display list
+								if (closeButtonPart && closeButtonPart.parent)
+									label.visible = label.getLayoutBoundsWidth() + label.getLayoutBoundsX() < closeButtonPart.getLayoutBoundsX();
+								else
+									label.visible = label.getLayoutBoundsWidth() + label.getLayoutBoundsX() < unscaledWidth - 2;
+							}
+							if (iconDisplay)
+							{
+								if (closeButtonPart && closeButtonPart.parent)
+									iconDisplay.visible = iconDisplay.getLayoutBoundsWidth() + iconDisplay.getLayoutBoundsX() < closeButtonPart.getLayoutBoundsX();
+								else
+									iconDisplay.visible = iconDisplay.getLayoutBoundsWidth() + iconDisplay.getLayoutBoundsX() < unscaledWidth - 2;
+							}
+						}
+						
+					]]>
+				</fx:Script>
+				
+				<!-- transitions -->
+				<!--- no transitions to prevent unexpected behaviour -->
+				
+				<!-- states -->
+				<s:states>
+					<s:State name="up" />
+					<s:State name="over" stateGroups="overStates"/>
+					<s:State name="down" stateGroups="downStates"/>
+					<s:State name="disabled" stateGroups="disabledStates" />
+					<s:State name="upAndSelected" stateGroups="selectedStates, selectedUpStates" />
+					<s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+					<s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+					<s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
+					<s:State name="upAndClosable" stateGroups="closableGroup"/>
+					<s:State name="overAndClosable" stateGroups="closableGroup, overStates"/>
+					<s:State name="downAndClosable" stateGroups="closableGroup, downStates"/>
+					<s:State name="disabledAndClosable" stateGroups="closableGroup, disabledStates" />
+					<s:State name="upAndSelectedAndClosable" stateGroups="closableGroup, selectedStates, selectedUpStates" />
+					<s:State name="overAndSelectedAndClosable" stateGroups="closableGroup, overStates, selectedStates" />
+					<s:State name="downAndSelectedAndClosable" stateGroups="closableGroup, downStates, selectedStates" />
+					<s:State name="disabledAndSelectedAndClosable" stateGroups="closableGroup, selectedUpStates, disabledStates, selectedStates" />
+				</s:states>
+				
+				<!--- border and fill -->
+				<s:Rect id="border" 
+						left="0" right="0" top="0" bottom="0">
+					<s:stroke>
+						<s:SolidColorStroke alpha="0" />
+					</s:stroke>
+				</s:Rect>
+				
+				<s:Rect left="0" right="0" top="0" bottom="0" radiusX="2" radiusY="2">
+					<s:fill>
+						<s:SolidColor color="0x000000" alpha="0.8" alpha.selectedStates="0.6"/>
+					</s:fill>
+				</s:Rect>
+				
+				
+				<!-- skin part -->
+				<!--- @optional -->
+				<!--- include icon manually, do not use SparkButtonSkin to retain layout control in the skin to accommodate truncation bug -->
+				<!--- be sure to include left -->
+				<s:BitmapImage id="iconDisplay" 
+							   left="10" 
+							   verticalCenter="0">
+					<s:filters>
+						<s:ColorMatrixFilter matrix.selectedStates="[
+						   0, 0, 0, 0, 255,
+						   0, 0, 0, 0, 208,
+						   0, 0, 0, 0, 0,
+						   0, 0, 0, 1, 0
+						   ]"/>
+					</s:filters>
+				</s:BitmapImage>
+				
+				<!-- skin part -->
+				<!--- @optional -->
+				<!--- *IMPORTANT * -->
+				<!--- when a label is so small than the truncation label is hidden, measurement never recovers so require a minWidth that will not hide the truncation ellipsis -->
+				<s:Label id="labelDisplay"
+						 minWidth="15"
+						 right="10" right.closableGroup="25"
+						 textAlign="center"
+						 maxDisplayedLines="1"
+						 verticalCenter="1"
+						 color="#CCCCCC"
+						 color.over="#FFFFFF"
+                         color.selectedStates="0xFFD200"
+						 paddingTop="2" paddingBottom="2"/>
+				
+				<!-- skin part -->
+				<!--- @optional -->
+				<s:Button id="closeButtonPart" 
+						  includeIn="closableGroup"
+						  verticalCenter="0"
+						  right="7"
+						  width="13" height="13"
+						  skinClass="{Class(ButtonBarCloseButtonSkin)}"/>
+				
+			</s:Skin>
+		</fx:Component>
+		
+	</fx:Declarations>
+	
+	<!-- states -->
+   <s:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+    </s:states>
+	
+	<!-- skin part -->
+	<!--- @required -->
+    <s:DataGroup id="dataGroup"
+				 top="0" right="0" bottom="0" left="0">
+        
+		<s:layout>
+			<layouts:ButtonBarLayout gap="-1"
+									 usePreferredWidth="true"/>
+        </s:layout>
+		
+        <s:itemRenderer>
+            <fx:Component>
+				<buttonBar:ButtonBarButton skinClass="{Class(ButtonBarButtonSkin)}"/>
+            </fx:Component>
+        </s:itemRenderer>		
+		
+    </s:DataGroup>
+    
+</s:Skin>

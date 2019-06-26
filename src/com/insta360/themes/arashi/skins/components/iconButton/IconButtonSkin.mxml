@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+////////////////////////////////////////////////////////////////////////////////
+//	
+//	Copyright 2014 Ardisia Labs LLC. All Rights Reserved.
+//
+//	This file is licensed under the Ardisia Component Library License. 
+//
+//	Only license holders are entitled to use this file subject to the  
+//	conditions of the license. All other uses are expressly forbidden. Visit 
+//	http://www.ardisialabs.com to view and purchase a license.
+//
+//	Apache Flex's source code notices are reproduced below.
+//
+// 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+//
+//  Licensed to the Apache Software Foundation (ASF) under one or more
+//  contributor license agreements.  See the NOTICE file distributed with
+//  this work for additional information regarding copyright ownership.
+//  The ASF licenses this file to You under the Apache License, Version 2.0
+//  (the "License"); you may not use this file except in compliance with
+//  the License.  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		alpha.disabled="0.5">
+	
+	<!-- hostComponent -->
+	<fx:Metadata>
+		<![CDATA[ [HostComponent("ardisia.components.iconButton.IconButton")] ]]>
+	</fx:Metadata>
+	
+	<!-- scripts -->
+	<fx:Script>
+		<![CDATA[
+			
+			//----------------------------------
+			//  variables
+			//----------------------------------
+			
+			protected var stylesDirty:Boolean;
+			
+			protected var _iconOffsetX:Number = 0;
+			
+			protected var _iconOffsetY:Number = 0;
+			
+			//----------------------------------
+			//  overridden methods
+			//----------------------------------
+			
+			override protected function updateDisplayList(width:Number, 
+														  height:Number):void
+			{
+				super.updateDisplayList(width, height);
+				
+				if (iconDisplay)
+				{
+					var centerX:Number = Math.round(width / 2 - iconDisplay.getPreferredBoundsWidth() / 2);
+					var centerY:Number = Math.round(height / 2 - iconDisplay.getPreferredBoundsHeight() / 2);
+					
+					if ((!isNaN(_iconOffsetX) && _iconOffsetX != 0) || (!isNaN(_iconOffsetY) && _iconOffsetY != 0))
+					{
+						// necessary to absolutely position in case the icon
+						// source changed; otherwise unexpected results;
+						centerX += _iconOffsetX;
+						centerY += _iconOffsetY;
+					}
+					iconDisplay.setLayoutBoundsPosition(Math.round(centerX), 
+						Math.round(centerY));
+				}
+			}
+			
+			override protected function commitProperties():void
+			{
+				super.commitProperties();
+				
+				if (stylesDirty)
+				{
+					stylesDirty = false;
+					
+					_iconOffsetX = getStyle("iconOffsetX");
+					_iconOffsetY = getStyle("iconOffsetY");
+					
+					invalidateDisplayList();
+				}
+			}
+			
+			override public function styleChanged(styleProp:String):void
+			{
+				super.styleChanged(styleProp);
+				
+				stylesDirty = true;
+				invalidateProperties();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<!-- declarations -->
+	<fx:Declarations>
+		
+		<!-- skin part -->
+		<!--- @optional -->
+		<!--<fx:Component id="flyoutLabelFactoryPart">
+			
+			<s:DataRenderer>-->
+				
+				<!--- fill to provide backing for label -->
+				<!--<s:Rect top="0" right="0" bottom="0" left="0">
+					<s:fill>
+						<s:SolidColor id="labelBackgroundFill" 
+									  alpha="{outerDocument.getStyle('flyoutBackgroundAlpha')}"
+									  color="{outerDocument.getStyle('flyoutBackgroundColor')}"/>
+					</s:fill>
+				</s:Rect>-->
+				
+				<!-- skin part -->
+				<!--- @optional -->
+				<!--<s:Label id="flyoutLabel"
+						 text="{data}"
+						 color="{outerDocument.getStyle('flyoutColor')}"
+						 verticalCenter="0"
+						 fontSize="{outerDocument.getStyle('fontSize')}"
+						 right="3" left="3"
+						 maxDisplayedLines="1"
+						 paddingTop="3" paddingBottom="2"/>
+				
+			</s:DataRenderer>
+			
+		</fx:Component>-->
+		
+	</fx:Declarations>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="up"/>
+		<s:State name="over"/>
+		<s:State name="down"/>
+		<s:State name="disabled"/>
+	</s:states>
+	
+	<!--- border -->
+	<s:Rect top="0" right="0" bottom="0" left="0" topLeftRadiusX="4" topRightRadiusX="4"
+			bottomLeftRadiusX="4" bottomRightRadiusX="4">
+		<!--<s:stroke>
+			<s:SolidColorStroke caps="round"
+								weight="2" color="0xff0000"/>
+		</s:stroke>-->
+		<s:fill>
+			<s:SolidColor alpha="0" alpha.over="0.1"
+						  color="#000000"/>
+		</s:fill>
+	</s:Rect>
+	
+	<!-- skin part -->
+	<!--- @optional -->
+	<s:BitmapImage id="iconDisplay" alpha.down="0.2" />
+
+</s:Skin>

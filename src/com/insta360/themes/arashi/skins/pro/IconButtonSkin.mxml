@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	Copyright 2014 Ardisia Labs LLC. All Rights Reserved.
+//
+//	This file is licensed under the Ardisia Component Library License.
+//
+//	Only license holders are entitled to use this file subject to the
+//	conditions of the license. All other uses are expressly forbidden. Visit
+//	http://www.ardisialabs.com to view and purchase a license.
+//
+//	Apache Flex's source code notices are reproduced below.
+//
+// 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+//  Licensed to the Apache Software Foundation (ASF) under one or more
+//  contributor license agreements.  See the NOTICE file distributed with
+//  this work for additional information regarding copyright ownership.
+//  The ASF licenses this file to You under the Apache License, Version 2.0
+//  (the "License"); you may not use this file except in compliance with
+//  the License.  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        minWidth="32" minHeight="32"
+        alpha.disabled="0.5">
+
+    <!-- hostComponent -->
+    <fx:Metadata>
+		<![CDATA[ [HostComponent("ardisia.components.iconButton.IconButton")] ]]>
+	</fx:Metadata>
+
+    <!-- scripts -->
+    <fx:Script>
+		<![CDATA[
+
+        //----------------------------------
+        //  variables
+        //----------------------------------
+
+        protected var stylesDirty:Boolean;
+
+        protected var _iconOffsetX:Number = 0;
+
+        protected var _iconOffsetY:Number = 0;
+
+        //----------------------------------
+        //  overridden methods
+        //----------------------------------
+
+        override protected function updateDisplayList(width:Number,
+                                                      height:Number):void
+        {
+            super.updateDisplayList(width, height);
+
+//            if (iconDisplay)
+//            {
+//                var centerX:Number = Math.round(width / 2 - iconDisplay.getPreferredBoundsWidth() / 2);
+//                var centerY:Number = Math.round(height / 2 - iconDisplay.getPreferredBoundsHeight() / 2);
+//
+//                if ((!isNaN(_iconOffsetX) && _iconOffsetX != 0) || (!isNaN(_iconOffsetY) && _iconOffsetY != 0))
+//                {
+//                    // necessary to absolutely position in case the icon
+//                    // source changed; otherwise unexpected results;
+//                    centerX += _iconOffsetX;
+//                    centerY += _iconOffsetY;
+//                }
+//                iconDisplay.setLayoutBoundsPosition(Math.round(centerX),
+//                        Math.round(centerY));
+//            }
+        }
+
+        override protected function commitProperties():void
+        {
+            super.commitProperties();
+
+            if (stylesDirty)
+            {
+                stylesDirty = false;
+
+                _iconOffsetX = getStyle("iconOffsetX");
+                _iconOffsetY = getStyle("iconOffsetY");
+
+                invalidateDisplayList();
+            }
+        }
+
+        override public function styleChanged(styleProp:String):void
+        {
+            super.styleChanged(styleProp);
+
+            stylesDirty = true;
+            invalidateProperties();
+        }
+
+        ]]>
+	</fx:Script>
+
+    <!-- declarations -->
+    <fx:Declarations>
+
+    </fx:Declarations>
+
+    <!-- states -->
+    <s:states>
+        <s:State name="up"/>
+        <s:State name="over"/>
+        <s:State name="down"/>
+        <s:State name="disabled"/>
+    </s:states>
+
+    <!--- border -->
+    <s:Rect top="0" right="0" bottom="0" left="0" topLeftRadiusX="2" topRightRadiusX="2"
+            bottomLeftRadiusX="2" bottomRightRadiusX="2">
+        <s:stroke>
+            <s:SolidColorStroke caps="round"
+                                weight="1" color="0x191919"/>
+        </s:stroke>
+        <s:fill>
+            <s:SolidColor alpha="1" alpha.over="0.1" color.down="0x000000" alpha.down="0.1"
+                          color.over="#ffffff" color="#333333"/>
+        </s:fill>
+    </s:Rect>
+
+    <!-- skin part -->
+    <!--- @optional -->
+    <s:HGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+        <s:BitmapImage id="iconDisplay" alpha.down="0.2" scaleMode="letterbox" fillMode="scale" height="100%" smooth="true"/>
+        <s:Label id="label" color="#cccccc" text="{hostComponent.label}" fontSize="12" fontFamily="Microsoft YaHei"
+                 includeInLayout="{hostComponent.label.length > 0}"
+        />
+    </s:HGroup>
+
+
+</s:Skin>

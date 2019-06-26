@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
+                xmlns:s="library://ns.adobe.com/flex/spark"
+                dataChange="dataChangeHandler(event)"
+                contentBackgroundColor="0x2D2D2D"
+                contentBackgroundAlpha="0"
+                autoDrawBackground="false"
+>
+
+<fx:Script><![CDATA[
+    import com.insta360.jsoneditor.model.ClipInfo;
+
+    import mx.events.FlexEvent;
+
+    import spark.components.List;
+
+    [Bindable]
+    public var clip:ClipInfo;
+
+    private function dataChangeHandler(event:FlexEvent):void {
+        clip = data as ClipInfo;
+    }
+
+    private function button1_clickHandler(event:MouseEvent):void {
+        var list:List = owner as List;
+        list.dataProvider.removeItemAt(list.dataProvider.getItemIndex(clip));
+    }
+    ]]></fx:Script>
+    <s:layout>
+        <s:HorizontalLayout verticalAlign="middle" gap="4"/>
+    </s:layout>
+    <s:VGroup height="100%">
+        <s:HGroup width="100%" verticalAlign="middle">
+            <s:Label text="name:" minWidth="60" />
+            <s:TextInput text="@{clip.name}" width="100%" />
+        </s:HGroup>
+        <s:HGroup width="100%" verticalAlign="middle">
+            <s:Label text="duration:" minWidth="60" />
+            <s:NumericStepper value="@{clip.duration}" maximum="1000000" minimum="0" width="100%" />
+        </s:HGroup>
+        <s:HGroup width="100%" verticalAlign="middle">
+            <s:Label text="factor:" minWidth="60" />
+            <s:NumericStepper value="@{clip.factor}" maximum="16" minimum="0" width="100%" snapInterval="0.0001" stepSize="0.0001" />
+        </s:HGroup>
+        <s:HGroup width="100%" horizontalAlign="right">
+            <s:Button label="Remove" height="16" click="button1_clickHandler(event)" />
+        </s:HGroup>
+    </s:VGroup>
+
+    <s:Rect width="2" height="100%">
+        <s:fill>
+            <s:SolidColor color="0x1A1A1A"/>
+        </s:fill>
+    </s:Rect>
+</s:ItemRenderer>
